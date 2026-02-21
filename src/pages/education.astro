@@ -1,44 +1,141 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { BookOpen, MapPin, Calendar, ExternalLink, Terminal, Code, Cpu } from 'lucide-react';
+
+const education = [
+  {
+    degree: "MS in Computer Science",
+    institution: "University of Central Missouri",
+    location: "Warrensburg, MO, USA",
+    duration: "Aug 2021 - Dec 2022",
+    link: "https://www.ucmo.edu/",
+    image: "/portfolio/images/education/ucm.png", 
+    coursework: ["Cloud Computing", "Advanced Algorithms", "Big Data Analytics", "Machine Learning"],
+    skills: ["AWS", "Python", "Research"]
+  },
+  {
+    degree: "PGD - IT Infrastructure & Security",
+    institution: "Centre for Development of Advanced Computing (C-DAC)",
+    location: "Pune, India",
+    duration: "Feb 2017 - Aug 2017",
+    link: "https://cdac.in/",
+    image: "/portfolio/images/education/cdac.jpg", 
+    coursework: ["System Administration", "Network Security", "Ethical Hacking", "Cloud Architecture"],
+    skills: ["Linux", "Bash", "Networking"]
+  },
+  {
+    degree: "B.Tech in Electronics & Comm.",
+    institution: "Dr. A.P.J. Abdul Kalam Technical University",
+    location: "Uttar Pradesh, India",
+    duration: "Jul 2012 - Jun 2016",
+    link: "https://aktu.ac.in/",
+    image: "/portfolio/images/education/aktu.jpg", 
+    coursework: ["Embedded Systems", "VLSI Design", "Microprocessors", "Digital Communication"],
+    skills: ["C++", "Circuit Design", "IoT"]
+  }
+];
 ---
 
 <Layout title="Education | Akash Verma">
-	<div class="flex flex-col gap-8">
-		<header class="border-b border-slate-200 dark:border-slate-800 pb-6 transition-colors">
-			<h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 transition-colors">Education</h1>
-			<p class="text-slate-600 dark:text-slate-400 text-lg transition-colors">My academic background and foundational training.</p>
+	<div class="flex flex-col gap-10">
+		<header class="border-b border-slate-200 dark:border-slate-800 pb-8 transition-colors flex flex-col md:flex-row md:items-end justify-between gap-4">
+			<div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-2 transition-colors tracking-tight">
+          Academic <span class="text-emerald-600 dark:text-emerald-400">Kernel</span>
+        </h1>
+      </div>
+			<p class="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed md:text-right max-w-none md:max-w-3xl">
+        Compiled theoretical foundations powering my practical engineering runtime.
+      </p>
 		</header>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-			<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors flex flex-col h-full shadow-sm dark:shadow-none">
-				<div class="text-emerald-700 dark:text-emerald-400 font-mono text-sm mb-4 inline-block px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 rounded-full border border-emerald-200 dark:border-emerald-800/50 w-fit transition-colors">Aug 2021 - Dec 2022</div>
-				<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 transition-colors">MS in Computer Science</h3>
-				<p class="text-slate-700 dark:text-slate-300 font-medium transition-colors">University of Central Missouri</p>
-				<p class="text-slate-500 font-medium text-sm mt-auto pt-4 flex items-center gap-2">
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-					Warrensburg, MO, USA
-				</p>
-			</div>
-			
-			<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors flex flex-col h-full shadow-sm dark:shadow-none">
-				<div class="text-emerald-700 dark:text-emerald-400 font-mono text-sm mb-4 inline-block px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 rounded-full border border-emerald-200 dark:border-emerald-800/50 w-fit transition-colors">Feb 2017 - Aug 2017</div>
-				<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 transition-colors">PGD-IT Infrastructure System & Security</h3>
-				<p class="text-slate-700 dark:text-slate-300 font-medium transition-colors">CDAC</p>
-				<p class="text-slate-500 font-medium text-sm mt-auto pt-4 flex items-center gap-2">
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-					Pune, India
-				</p>
-			</div>
-			
-			<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors flex flex-col h-full shadow-sm dark:shadow-none">
-				<div class="text-emerald-700 dark:text-emerald-400 font-mono text-sm mb-4 inline-block px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 rounded-full border border-emerald-200 dark:border-emerald-800/50 w-fit transition-colors">Jul 2012 - Jun 2016</div>
-				<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 transition-colors">B.Tech in Electronics & Communication</h3>
-				<p class="text-slate-700 dark:text-slate-300 font-medium transition-colors">AKTU</p>
-				<p class="text-slate-500 font-medium text-sm mt-auto pt-4 flex items-center gap-2">
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-					Uttar Pradesh, India
-				</p>
-			</div>
-		</div>
+    <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-3 md:ml-6 space-y-12 pb-12 group/list">
+      {education.map((edu, index) => (
+        <div class="relative pl-8 md:pl-12 transition-opacity duration-500 hover:!opacity-100 group-hover/list:opacity-40">
+          {/* Timeline Dot */}
+          <div class={`absolute -left-[9px] top-6 w-5 h-5 rounded-full border-4 border-slate-50 dark:border-slate-950 shadow-[0_0_0_4px_rgba(16,185,129,0.2)] dark:shadow-[0_0_0_4px_rgba(16,185,129,0.1)] z-10 transition-colors duration-300
+            ${index === 0 ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700 group-hover:bg-emerald-500'}
+          `}></div>
+          
+          <article class={`group relative flex flex-col md:flex-row bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10
+            ${index === 0 
+              ? 'border-emerald-500/50 shadow-emerald-500/10' 
+              : 'border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 dark:hover:border-emerald-500/50'}
+          `}>
+            
+            {/* Image Section - now on the side/top */}
+            <div class="relative h-48 md:h-auto md:w-1/3 overflow-hidden">
+              <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+              <img 
+                src={edu.image} 
+                alt={edu.institution} 
+                class={`w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 filter 
+                  ${index === 0 ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}
+                `}
+              />
+              {/* Overlay Gradient */}
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent opacity-90 md:bg-gradient-to-r md:from-transparent md:to-slate-900/50"></div>
+              
+              <div class="absolute bottom-4 left-6 right-6 z-20 text-white md:hidden">
+                 <h3 class="text-xl font-bold leading-tight mb-1 drop-shadow-md">{edu.degree}</h3>
+              </div>
+            </div>
+
+            {/* Content Section */}
+            <div class="flex-1 flex flex-col p-6 dark:bg-[#0d1117] bg-slate-50 transition-colors">
+               
+               <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-4 gap-2">
+                  <div>
+                    <h3 class="hidden md:block text-xl font-bold text-slate-900 dark:text-white leading-tight mb-1">{edu.degree}</h3>
+                    <h4 class="font-bold text-slate-700 dark:text-slate-300 text-lg group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                      {edu.institution}
+                    </h4>
+                    <p class="text-slate-500 text-sm font-medium flex items-center gap-1 mt-1">
+                      <MapPin className="w-3 h-3 text-emerald-500" /> {edu.location}
+                    </p>
+                  </div>
+
+                  <div class="flex items-center gap-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-mono whitespace-nowrap">
+                        <Calendar className="w-3 h-3" />
+                        {edu.duration}
+                    </div>
+                    <a href={edu.link} target="_blank" rel="noopener noreferrer" class="p-2 bg-slate-200 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 rounded-full text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" title="Visit University Website">
+                       <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+               </div>
+
+               {/* "Terminal" Output */}
+               <div class="mt-4 bg-slate-200 dark:bg-slate-800/50 rounded-lg p-4 font-mono text-xs border border-slate-300 dark:border-slate-800 relative overflow-hidden group-hover:border-emerald-500/30 transition-colors shadow-inner">
+                  
+                  <div class="flex items-center gap-2 mb-3 border-b border-slate-300 dark:border-slate-700 pb-2">
+                    <div class="w-2 h-2 rounded-full bg-red-400"></div>
+                    <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                    <span class="ml-auto text-[10px] text-slate-500">zsh — {edu.duration.split(' - ')[1]}</span>
+                  </div>
+                  
+                  <div class="space-y-1 text-slate-600 dark:text-slate-400">
+                    <div class="flex gap-2">
+                      <span class="text-emerald-600 dark:text-emerald-500 font-bold">➜</span>
+                      <span class="text-blue-600 dark:text-blue-400">~</span>
+                      <span>ls ./coursework</span>
+                    </div>
+                    <div class="pl-4 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 pt-1 text-emerald-700 dark:text-emerald-300/80">
+                      {edu.coursework.map((course) => (
+                        <span class="flex items-center gap-2">
+                          <span class="w-1 h-1 rounded-full bg-emerald-500/50"></span>
+                          {course}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+               </div>
+            </div>
+          </article>
+        </div>
+      ))}
+    </div>
 	</div>
 </Layout>
