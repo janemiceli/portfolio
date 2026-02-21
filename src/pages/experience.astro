@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Experience | Akash Verma">
+	<div class="flex flex-col gap-8">
+		<header class="border-b border-slate-200 dark:border-slate-800 pb-6 transition-colors">
+			<h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 transition-colors">Experience</h1>
+			<p class="text-slate-600 dark:text-slate-400 text-lg transition-colors">A timeline of my professional journey in Site Reliability and Cloud Engineering.</p>
+		</header>
+
+		<div class="relative border-l border-slate-200 dark:border-slate-800 ml-4 md:ml-6 space-y-12 pb-8 transition-colors">
+			
+			<!-- TouchNet -->
+			<div class="relative pl-8 md:pl-0">
+				<div class="md:hidden absolute w-4 h-4 bg-emerald-500 rounded-full -left-[25px] top-1.5 border-4 border-slate-50 dark:border-slate-950 transition-colors"></div>
+				<div class="flex flex-col md:flex-row gap-4 md:gap-8">
+					<div class="md:w-1/4 flex flex-col items-start md:items-end text-left md:text-right relative">
+						<div class="hidden md:block absolute w-4 h-4 bg-emerald-500 rounded-full -right-[41px] top-1.5 border-4 border-slate-50 dark:border-slate-950 transition-colors"></div>
+						<span class="text-emerald-600 dark:text-emerald-400 font-mono text-sm font-semibold transition-colors">May 2022 – Present</span>
+						<span class="text-slate-500 font-medium text-sm mt-1">Lenexa, KS (Remote)</span>
+					</div>
+					<div class="md:w-3/4 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors shadow-sm dark:shadow-none">
+						<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 transition-colors">Site Reliability Engineer</h3>
+						<h4 class="text-lg text-slate-700 dark:text-slate-300 mb-4 transition-colors">TouchNet Information Systems Inc (Global Payments)</h4>
+						<ul class="space-y-3 text-slate-600 dark:text-slate-400 list-disc list-inside marker:text-emerald-500 transition-colors">
+							<li>Led cloud migration initiatives using AWS Migration Hub and Google Data Transfer Service to optimize computing, storage, and network performance.</li>
+							<li>Deployed and managed AI/ML workloads on Vertex AI and Kubeflow, automating training, deployment, and monitoring pipelines.</li>
+							<li>Built and optimized GPU-based HPC clusters (NVIDIA DGX, GKE nodes, Cisco UCS) to enhance performance and reliability of AI workloads.</li>
+							<li>Implemented observability and reliability frameworks with SLOs/SLIs, error budgets, and real-time dashboards for AI and enterprise services.</li>
+							<li>Automated infrastructure and operations using Python, Terraform, and Ansible, reducing manual toil and improving efficiency.</li>
+							<li>Engineered fault-tolerant Kubernetes and GCP architectures to ensure scalability and resilience under high-load ML training scenarios.</li>
+							<li>Developed and maintained CI/CD pipelines (Azure DevOps, GitHub Actions, Jenkins) for infrastructure provisioning and ML deployments.</li>
+							<li>Integrated ChatOps automation via Python and GCP Functions to streamline operations and incident response.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Quotient Technology -->
+			<div class="relative pl-8 md:pl-0">
+				<div class="md:hidden absolute w-4 h-4 bg-slate-400 dark:bg-slate-600 rounded-full -left-[25px] top-1.5 border-4 border-slate-50 dark:border-slate-950 transition-colors"></div>
+				<div class="flex flex-col md:flex-row gap-4 md:gap-8">
+					<div class="md:w-1/4 flex flex-col items-start md:items-end text-left md:text-right relative">
+						<div class="hidden md:block absolute w-4 h-4 bg-slate-400 dark:bg-slate-600 rounded-full -right-[41px] top-1.5 border-4 border-slate-50 dark:border-slate-950 transition-colors"></div>
+						<span class="text-emerald-600 dark:text-emerald-400 font-mono text-sm font-semibold transition-colors">Sep 2019 – Apr 2021</span>
+						<span class="text-slate-500 font-medium text-sm mt-1">Bangalore, India</span>
+					</div>
+					<div class="md:w-3/4 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors shadow-sm dark:shadow-none">
+						<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 transition-colors">DevOps Engineer</h3>
+						<h4 class="text-lg text-slate-700 dark:text-slate-300 mb-4 transition-colors">Quotient Technology</h4>
+						<ul class="space-y-3 text-slate-600 dark:text-slate-400 list-disc list-inside marker:text-emerald-500 transition-colors">
+							<li>Led DevOps initiatives and CI/CD automation across Azure, AWS, and GCP, streamlining multi-team software delivery and release management.</li>
+							<li>Migrated and modernized legacy workloads to GKE and EKS, implementing Terraform-based infrastructure provisioning and automated deployment pipelines.</li>
+							<li>Implemented self-healing, disaster recovery, and hybrid automation using IBM UCD, Jenkins, and WSFTP, ensuring high availability.</li>
+							<li>Developed intelligent automation solutions, including a Google NLP–powered chatbot (QUACK) and Ansible playbooks for JBoss, Splunk, and RabbitMQ.</li>
+							<li>Architected scalable, secure, and fault-tolerant cloud infrastructures leveraging AWS (EC2, S3, ELB, IAM) and GCP services.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Zycus Infotech -->
+			<div class="relative pl-8 md:pl-0">
+				<div class="md:hidden absolute w-4 h-4 bg-slate-400 dark:bg-slate-600 rounded-full -left-[25px] top-1.5 border-4 border-slate-50 dark:border-slate-950 transition-colors"></div>
+				<div class="flex flex-col md:flex-row gap-4 md:gap-8">
+					<div class="md:w-1/4 flex flex-col items-start md:items-end text-left md:text-right relative">
+						<div class="hidden md:block absolute w-4 h-4 bg-slate-400 dark:bg-slate-600 rounded-full -right-[41px] top-1.5 border-4 border-slate-50 dark:border-slate-950 transition-colors"></div>
+						<span class="text-emerald-600 dark:text-emerald-400 font-mono text-sm font-semibold transition-colors">Mar 2018 – Aug 2019</span>
+						<span class="text-slate-500 font-medium text-sm mt-1">Bangalore/Mumbai, India</span>
+					</div>
+					<div class="md:w-3/4 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors shadow-sm dark:shadow-none">
+						<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 transition-colors">DevOps Engineer</h3>
+						<h4 class="text-lg text-slate-700 dark:text-slate-300 mb-4 transition-colors">Zycus Infotech</h4>
+						<ul class="space-y-3 text-slate-600 dark:text-slate-400 list-disc list-inside marker:text-emerald-500 transition-colors">
+							<li>Automated Splunk forwarder deployments and configurations using Ansible, streamlining monitoring setup across environments.</li>
+							<li>Implemented CI/CD pipelines for AI and enterprise apps (e.g., Merlin-AI) using Ansible, Jenkins, and DVC to manage large ML model files.</li>
+							<li>Containerized legacy applications like eInvoice CI using Docker and Jenkins, improving scalability and deployment efficiency.</li>
+							<li>Migrated and upgraded critical systems, including GitLab (v8.5→10.5) and Icinga2 (v2.6→2.8), using automation via Chef and shell scripting.</li>
+							<li>Managed and automated AWS infrastructure operations, leveraging Code Deploy, ECS, and DMS for deployment, backups, and database migrations.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Justdial Ltd -->
+			<div class="relative pl-8 md:pl-0">
+				<div class="md:hidden absolute w-4 h-4 bg-slate-400 dark:bg-slate-600 rounded-full -left-[25px] top-1.5 border-4 border-slate-50 dark:border-slate-950 transition-colors"></div>
+				<div class="flex flex-col md:flex-row gap-4 md:gap-8">
+					<div class="md:w-1/4 flex flex-col items-start md:items-end text-left md:text-right relative">
+						<div class="hidden md:block absolute w-4 h-4 bg-slate-400 dark:bg-slate-600 rounded-full -right-[41px] top-1.5 border-4 border-slate-50 dark:border-slate-950 transition-colors"></div>
+						<span class="text-emerald-600 dark:text-emerald-400 font-mono text-sm font-semibold transition-colors">Aug 2017 – Feb 2018</span>
+						<span class="text-slate-500 font-medium text-sm mt-1">Mumbai, India</span>
+					</div>
+					<div class="md:w-3/4 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors shadow-sm dark:shadow-none">
+						<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 transition-colors">Linux System Administrator</h3>
+						<h4 class="text-lg text-slate-700 dark:text-slate-300 mb-4 transition-colors">Justdial Ltd</h4>
+						<ul class="space-y-3 text-slate-600 dark:text-slate-400 list-disc list-inside marker:text-emerald-500 transition-colors">
+							<li>Participated in the full software development lifecycle following Agile Scrum methodologies.</li>
+							<li>Developed microservices using Spring Boot and REST frameworks, with front-end integration via Bootstrap and AngularJS.</li>
+							<li>Administered and optimized Linux systems, handling installation, configuration, and performance tuning for high availability.</li>
+							<li>Automated system and data workflows using Python and Bash scripts for tasks like file processing, validation, and movement.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</Layout>

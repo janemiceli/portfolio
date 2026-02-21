@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const skillCategories = [
+	{
+		title: "Cloud Platforms",
+		skills: ["AWS", "Azure", "GCP"]
+	},
+	{
+		title: "AI & Machine Learning",
+		skills: ["Google Vertex AI", "AI Agents", "HPC", "Nvidia DGX Systems"]
+	},
+	{
+		title: "CI/CD & Version Control",
+		skills: ["Jenkins", "Azure DevOps", "GitHub Actions", "Argo CD", "Helm", "GIT", "Bitbucket", "GitHub", "Gitlab"]
+	},
+	{
+		title: "Containerization & Orchestration",
+		skills: ["Kubernetes", "Docker", "Istiod", "Anthos Service Mesh"]
+	},
+	{
+		title: "Infrastructure as Code & Config",
+		skills: ["Terraform", "Ansible", "IBM UCD"]
+	},
+	{
+		title: "Scripting & Programming",
+		skills: ["Python", "Bash/Shell", "PowerShell", "Java", "Go", "Groovy"]
+	},
+	{
+		title: "Databases",
+		skills: ["Oracle MySQL", "MongoDB", "DynamoDB", "Cassandra", "PostgreSQL", "MS SQL", "Snowflake"]
+	},
+	{
+		title: "OS & Virtualization",
+		skills: ["Linux", "Windows Server", "Ubuntu", "RHEL", "Centos", "VMware vSphere", "Hyper-V", "VirtualBox"]
+	}
+];
+---
+
+<Layout title="Skills | Akash Verma">
+	<div class="flex flex-col gap-12">
+		<header class="border-b border-slate-200 dark:border-slate-800 pb-6 transition-colors">
+			<h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 transition-colors">Technical Arsenal</h1>
+			<p class="text-slate-600 dark:text-slate-400 text-lg transition-colors">A comprehensive overview of my technical skills and tools.</p>
+		</header>
+
+		<!-- Skills Grid -->
+		<section>
+			<h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-8 flex items-center gap-3 transition-colors">
+				<svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+				Core Competencies
+			</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{skillCategories.map(category => (
+					<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors shadow-sm dark:shadow-none">
+						<h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 font-mono transition-colors">{category.title}</h3>
+						<div class="flex flex-wrap gap-2">
+							{category.skills.map(skill => (
+								<span class="px-3 py-1 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-md border border-slate-200 dark:border-slate-700 transition-colors">
+									{skill}
+								</span>
+							))}
+						</div>
+					</div>
+				))}
+			</div>
+		</section>
+	</div>
+</Layout>

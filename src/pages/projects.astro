@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+	{
+		title: "Vertex AI ML Pipeline Automation",
+		role: "Site Reliability Engineer",
+		description: "Architected and deployed automated training, deployment, and monitoring pipelines for AI/ML workloads on Google Cloud Vertex AI and Kubeflow.",
+		impact: "Reduced manual toil and improved efficiency for ML deployments under high-load training scenarios.",
+		tech: ["GCP", "Vertex AI", "Kubeflow", "Terraform", "Python"],
+		type: "Case Study"
+	},
+	{
+		title: "Hybrid Cloud Migration to GKE/EKS",
+		role: "DevOps Engineer",
+		description: "Led the migration and modernization of legacy workloads to Google Kubernetes Engine (GKE) and Amazon Elastic Kubernetes Service (EKS).",
+		impact: "Streamlined multi-team software delivery and release management across Azure, AWS, and GCP.",
+		tech: ["AWS", "GCP", "Kubernetes", "Terraform", "Jenkins"],
+		type: "Architecture"
+	},
+	{
+		title: "GPU-Based HPC Cluster Optimization",
+		role: "Site Reliability Engineer",
+		description: "Built and optimized high-performance computing clusters using NVIDIA DGX, GKE nodes, and Cisco UCS.",
+		impact: "Enhanced performance and reliability of AI workloads, ensuring scalability and resilience.",
+		tech: ["NVIDIA DGX", "GKE", "Cisco UCS", "Ansible"],
+		type: "Infrastructure"
+	},
+	{
+		title: "Intelligent ChatOps Automation (QUACK)",
+		role: "DevOps Engineer",
+		description: "Developed a Google NLP-powered chatbot and integrated ChatOps automation via Python and GCP Functions.",
+		impact: "Streamlined operations, incident response, and self-healing disaster recovery.",
+		tech: ["Python", "GCP Functions", "Google NLP", "Ansible"],
+		type: "Automation"
+	}
+];
+---
+
+<Layout title="Projects & Case Studies | Akash Verma">
+	<div class="flex flex-col gap-12">
+		<header class="border-b border-slate-200 dark:border-slate-800 pb-6 transition-colors">
+			<h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 transition-colors">Projects & Case Studies</h1>
+			<p class="text-slate-600 dark:text-slate-400 text-lg transition-colors">A selection of architectural designs, migrations, and automation solutions I've built.</p>
+		</header>
+
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+			{projects.map(project => (
+				<div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:border-emerald-500/30 transition-all group flex flex-col h-full shadow-sm dark:shadow-none">
+					<div class="p-6 flex-grow">
+						<div class="flex justify-between items-start mb-4">
+							<span class="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-mono rounded-full border border-emerald-200 dark:border-emerald-800/50 transition-colors">
+								{project.type}
+							</span>
+							<span class="text-slate-500 font-mono text-sm">{project.role}</span>
+						</div>
+						<h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+							{project.title}
+						</h3>
+						<p class="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed transition-colors">
+							{project.description}
+						</p>
+						<div class="bg-emerald-50 dark:bg-slate-800/50 rounded-lg p-4 border-l-2 border-emerald-500 mb-6 transition-colors">
+							<p class="text-slate-700 dark:text-slate-300 text-sm transition-colors">
+								<strong class="text-slate-900 dark:text-slate-200">Impact:</strong> {project.impact}
+							</p>
+						</div>
+					</div>
+					<div class="px-6 py-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 mt-auto transition-colors">
+						<div class="flex flex-wrap gap-2">
+							{project.tech.map(tech => (
+								<span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 px-2 py-1 rounded border border-slate-200 dark:border-slate-700 transition-colors">
+									{tech}
+								</span>
+							))}
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<!-- IaC Snippet Placeholder -->
+		<section class="mt-8 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-[#1e1e1e] transition-colors shadow-xl">
+			<div class="flex items-center justify-between px-4 py-3 bg-slate-800 border-b border-slate-700">
+				<div class="flex items-center gap-3">
+					<svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+					<span class="text-slate-300 font-mono text-sm">main.tf - GKE Cluster Provisioning</span>
+				</div>
+				<span class="text-slate-500 text-xs font-mono">Infrastructure as Code</span>
+			</div>
+			<div class="p-6 overflow-x-auto bg-[#1e1e1e]">
+				<pre><code class="text-sm font-mono text-slate-300">
+<span class="text-emerald-400">resource</span> <span class="text-blue-400">"google_container_cluster"</span> <span class="text-yellow-300">"primary"</span> {'{'}
+  name     = <span class="text-yellow-300">"ml-training-cluster"</span>
+  location = <span class="text-yellow-300">"us-central1"</span>
+
+  <span class="text-slate-500"># We can't create a cluster with no node pool defined, but we want to only use</span>
+  <span class="text-slate-500"># separately managed node pools. So we create the smallest possible default</span>
+  <span class="text-slate-500"># node pool and immediately delete it.</span>
+  remove_default_node_pool = <span class="text-purple-400">true</span>
+  initial_node_count       = <span class="text-purple-400">1</span>
+
+  workload_identity_config {'{'}
+    workload_pool = <span class="text-yellow-300">"${'{'}var.project_id{'}'}.svc.id.goog"</span>
+  {'}'}
+{'}'}
+
+<span class="text-emerald-400">resource</span> <span class="text-blue-400">"google_container_node_pool"</span> <span class="text-yellow-300">"gpu_nodes"</span> {'{'}
+  name       = <span class="text-yellow-300">"gpu-node-pool"</span>
+  location   = <span class="text-yellow-300">"us-central1"</span>
+  cluster    = google_container_cluster.primary.name
+  node_count = <span class="text-purple-400">3</span>
+
+  node_config {'{'}
+    machine_type = <span class="text-yellow-300">"a2-highgpu-1g"</span> <span class="text-slate-500"># NVIDIA A100 GPU</span>
+    
+    guest_accelerator {'{'}
+      type  = <span class="text-yellow-300">"nvidia-tesla-a100"</span>
+      count = <span class="text-purple-400">1</span>
+    {'}'}
+    
+    oauth_scopes = [
+      <span class="text-yellow-300">"https://www.googleapis.com/auth/cloud-platform"</span>
+    ]
+  {'}'}
+{'}'}
+				</code></pre>
+			</div>
+		</section>
+	</div>
+</Layout>

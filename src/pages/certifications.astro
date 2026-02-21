@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const certifications = [
+	"Generative AI Leader Certification",
+	"Google Cloud Engineer",
+	"Prof. Cloud Architect Certification",
+	"GitHub Foundations",
+	"Site Reliability Engineering: Measuring and Managing Reliability",
+	"Microsoft Certified: Azure Fundamentals",
+	"Microsoft Certified: Azure Administrator Associate"
+];
+---
+
+<Layout title="Certifications | Akash Verma">
+	<div class="flex flex-col gap-12">
+		<header class="border-b border-slate-200 dark:border-slate-800 pb-6 transition-colors">
+			<h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 transition-colors">Certifications</h1>
+			<p class="text-slate-600 dark:text-slate-400 text-lg transition-colors">Professional certifications and credentials.</p>
+		</header>
+
+		<section>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				{certifications.map(cert => (
+					<div class="flex items-center gap-4 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg p-4 hover:border-emerald-500/30 transition-all shadow-sm dark:shadow-none hover:bg-slate-50 dark:hover:bg-slate-900/50">
+						<div class="w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center flex-shrink-0 border border-emerald-200 dark:border-emerald-800/50 transition-colors">
+							<svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+						</div>
+						<span class="text-slate-700 dark:text-slate-300 font-medium transition-colors">{cert}</span>
+					</div>
+				))}
+			</div>
+		</section>
+	</div>
+</Layout>
