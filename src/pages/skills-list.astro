@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Code, Boxes, Server, Cloud, Activity, Database, ArrowRight, GitBranch, Terminal } from 'lucide-react';
+
+const pipeline = [
+  {
+    stage: "Source & Logic",
+    icon: Code,
+    description: "Writing scalable, efficient code.",
+    color: "text-blue-500",
+    border: "border-blue-500",
+    bg: "bg-blue-500/10",
+    tools: [
+      { name: "Python", icon: "devicon-python-plain colored" },
+      { name: "Java", icon: "devicon-java-plain colored" },
+      { name: "Node.js", icon: "devicon-nodejs-plain-wordmark colored" },
+      { name: "FastAPI", icon: "devicon-fastapi-plain colored" },
+      { name: "GraphQL", icon: "devicon-graphql-plain colored" },
+      { name: "Git", icon: "devicon-git-plain colored" },
+    ]
+  },
+  {
+    stage: "Build & Containerize",
+    icon: Boxes,
+    description: "Packaging applications for consistency.",
+    color: "text-orange-500",
+    border: "border-orange-500",
+    bg: "bg-orange-500/10",
+    tools: [
+      { name: "Docker", icon: "devicon-docker-plain colored" },
+      { name: "Jenkins", icon: "devicon-jenkins-plain colored" },
+      { name: "GitHub Actions", icon: "devicon-githubactions-plain colored" },
+      { name: "Azure DevOps", icon: "devicon-azuredevops-plain colored" },
+      { name: "IBM UCD", icon: "https://www.vectorlogo.zone/logos/ibm/ibm-icon.svg" },
+      { name: "Bash", icon: "devicon-bash-plain colored" },
+      { name: "Linux", icon: "devicon-linux-plain colored" },
+    ]
+  },
+  {
+    stage: "Orchestration & Mesh",
+    icon: Server,
+    description: "Managing workloads at scale.",
+    color: "text-indigo-500",
+    border: "border-indigo-500",
+    bg: "bg-indigo-500/10",
+    tools: [
+      { name: "Kubernetes", icon: "devicon-kubernetes-plain colored" },
+      { name: "Helm", icon: "https://cdn.simpleicons.org/helm/0F1689" },
+      { name: "ArgoCD", icon: "devicon-argocd-plain colored" },
+      { name: "Istio", icon: "https://cdn.simpleicons.org/istio/466BB0" },
+      { name: "Google Anthos", icon: "https://icon.icepanel.io/GCP/svg/Anthos.svg" },
+      { name: "Traefik", icon: "https://www.vectorlogo.zone/logos/traefikio/traefikio-icon.svg" },
+      { name: "Nginx", icon: "devicon-nginx-original colored" },
+    ]
+  },
+  {
+    stage: "Infrastructure (IaC)",
+    icon: Cloud,
+    description: "Provisioning underlying resources.",
+    color: "text-cyan-500",
+    border: "border-cyan-500",
+    bg: "bg-cyan-500/10",
+    tools: [
+      { name: "Terraform", icon: "devicon-terraform-plain colored" },
+      { name: "Ansible", icon: "devicon-ansible-plain colored" },
+      { name: "AWS", icon: "devicon-amazonwebservices-plain-wordmark colored" },
+      { name: "Azure", icon: "devicon-azure-plain colored" },
+      { name: "GCP", icon: "devicon-googlecloud-plain colored" },
+      { name: "vSphere", icon: "https://icon.icepanel.io/Technology/svg/vSphere.svg" },
+    ]
+  },
+  {
+    stage: "Observability",
+    icon: Activity,
+    description: "Monitoring health and performance.",
+    color: "text-purple-500",
+    border: "border-purple-500",
+    bg: "bg-purple-500/10",
+    tools: [
+      { name: "Prometheus", icon: "devicon-prometheus-original colored" },
+      { name: "Grafana", icon: "https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg" },
+      { name: "Splunk", icon: "devicon-splunk-original-wordmark colored" },
+      { name: "Datadog", icon: "https://www.vectorlogo.zone/logos/datadoghq/datadoghq-icon.svg" },
+      { name: "New Relic", icon: "https://www.vectorlogo.zone/logos/newrelic/newrelic-icon.svg" },
+      { name: "Nagios", icon: "https://www.vectorlogo.zone/logos/nagios/nagios-icon.svg" },
+      { name: "GCP Monitoring", icon: "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" },
+      { name: "CloudWatch", icon: "https://www.vectorlogo.zone/logos/amazon_cloudwatch/amazon_cloudwatch-icon.svg" },
+      { name: "Azure Monitor", icon: "https://az-icons.com/export/icons/227729af9ea80e3e85ca0beb68343780.svg" },
+    ]
+  },
+  {
+    stage: "Data Persistence",
+    icon: Database,
+    description: "Storing state securely.",
+    color: "text-yellow-500",
+    border: "border-yellow-500",
+    bg: "bg-yellow-500/10",
+    tools: [
+      { name: "PostgreSQL", icon: "devicon-postgresql-plain colored" },
+      { name: "MongoDB", icon: "devicon-mongodb-plain colored" },
+      { name: "Redis", icon: "devicon-redis-plain colored" },
+      { name: "Elasticsearch", icon: "devicon-elasticsearch-plain colored" },
+      { name: "Cloud SQL", icon: "https://icon.icepanel.io/GCP/svg/Cloud-SQL.svg" },
+      { name: "BigQuery", icon: "https://www.vectorlogo.zone/logos/google_bigquery/google_bigquery-icon.svg" },
+      { name: "AWS RDS", icon: "https://icon.icepanel.io/AWS/svg/Database/RDS.svg" },
+      { name: "Cosmos DB", icon: "https://az-icons.com/export/icons/395e1f421234e56a7c504141379cf846.svg" },
+      { name: "Service Bus", icon: "https://az-icons.com/export/icons/c7f4a8a38e967df7e3f86730d0230732.svg" },
+    ]
+  }
+];
+---
+
+<Layout title="Skills | Akash Verma">
+	<div class="flex flex-col gap-10">
+		<header class="border-b border-slate-200 dark:border-slate-800 pb-8 transition-colors flex flex-col md:flex-row md:items-end justify-between gap-4">
+			<div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-2 transition-colors tracking-tight">
+          DevOps <span class="text-emerald-600 dark:text-emerald-400">Toolchain</span>
+        </h1>
+      </div>
+			<p class="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed md:text-right max-w-none md:max-w-2xl">
+        My technical capabilities visualized as a continuous delivery pipeline. From source code to production observability.
+      </p>
+		</header>
+
+    {/* Pipeline Container */}
+    <div class="relative flex flex-col gap-8 md:gap-12">
+      
+      {/* Connecting Line (Desktop) */}
+      <div class="hidden md:block absolute left-[2.25rem] top-8 bottom-8 w-0.5 bg-gradient-to-b from-slate-200 via-emerald-500/50 to-slate-200 dark:from-slate-800 dark:via-emerald-500/50 dark:to-slate-800 z-0"></div>
+
+      {pipeline.map((stage, index) => (
+        <div class="relative pl-0 md:pl-24">
+           
+           {/* Connector Dot/Icon (Desktop) */}
+           <div class={`hidden md:flex absolute left-0 top-6 w-20 h-20 rounded-full border-4 border-slate-50 dark:border-slate-950 bg-white dark:bg-slate-900 shadow-xl z-10 items-center justify-center group hover:scale-110 transition-transform duration-300 ring-4 ring-slate-100 dark:ring-slate-800`}>
+              <div class={`w-12 h-12 rounded-full flex items-center justify-center ${stage.bg} ${stage.color}`}>
+                <stage.icon className="w-6 h-6" />
+              </div>
+           </div>
+
+           {/* Content Card */}
+           <div class="relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 group hover:-translate-y-1 overflow-hidden">
+              
+              {/* Background Gradient */}
+              <div class={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 bg-gradient-to-r ${stage.color.replace('text-', 'from-')} to-transparent`}></div>
+
+              {/* Mobile Header */}
+              <div class="flex items-center gap-4 mb-6 md:hidden">
+                 <div class={`p-3 rounded-xl ${stage.bg} ${stage.color}`}>
+                    <stage.icon className="w-6 h-6" />
+                 </div>
+                 <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">{stage.stage}</h2>
+              </div>
+
+              {/* Desktop Header (Inline) */}
+              <div class="hidden md:flex items-center justify-between mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
+                 <div>
+                   <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{stage.stage}</h2>
+                   <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{stage.description}</p>
+                 </div>
+              </div>
+
+              {/* Tools Grid */}
+              <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 relative z-10">
+                {stage.tools.map((tool) => (
+                  <div class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:shadow-lg transition-all duration-300 group/tool cursor-default transform hover:-translate-y-1">
+                    {tool.icon.startsWith('http') ? (
+                       <img src={tool.icon} alt={tool.name} class="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover/tool:scale-110 drop-shadow-sm object-contain" />
+                    ) : (
+                       <i class={`${tool.icon} text-4xl md:text-5xl transition-transform duration-300 group-hover/tool:scale-110 drop-shadow-sm`}></i>
+                    )}
+                    <span class="text-[10px] md:text-xs font-medium text-slate-500 dark:text-slate-400 group-hover/tool:text-slate-900 dark:group-hover/tool:text-white text-center transition-colors">
+                      {tool.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+           </div>
+
+        </div>
+      ))}
+    </div>
+	</div>
+</Layout>
