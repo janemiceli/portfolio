@@ -290,6 +290,205 @@ const SkillsArchitecture = () => {
 
   const categories = getCategories(isMobile);
 
+  // Helper to calculate absolute positions for all skills to draw connections
+  const getAllSkillPositions = () => {
+    const positions: any = {};
+    
+    categories.forEach(layer => {
+      const skills = layer.skills || [];
+      const total = skills.length;
+      const spacing = isMobile ? 50 : 80; // Match render logic
+
+      skills.forEach((skill, i) => {
+        let xOffset = 0;
+        let yOffset = 0;
+
+        // Same logic as render loop
+        if (total > 5) {
+            const row1Count = Math.ceil(total / 2);
+            const isRow1 = i < row1Count;
+            const itemsInThisRow = isRow1 ? row1Count : (total - row1Count);
+            
+            const rowIndex = isRow1 ? i : (i - row1Count);
+            const centerIndexForThisRow = (itemsInThisRow - 1) / 2;
+            
+            xOffset = (rowIndex - centerIndexForThisRow) * (spacing * 0.9); 
+            
+            // Vertical offset
+            // Default Desktop
+            // For DevOps (Total 9), Row 1 is -45, Row 2 is 35. Gap is 80px.
+            // Center Y is 0 offset.
+            // If we start from Bottom of Row 1 (y = -45 + 22 = -23), and go down 30px, we are at +7.
+            // Row 2 starts at +35 - 22 = +13. 
+            // So +7 is well above +13. It should be safe?
+            // Wait, Row 2 icons are centered at +35. Top edge is +13.
+            // If we drop to +7, we are clear.
+            
+            // However, maybe the gap calculation needs to be more robust.
+            // Let's widen the row gap slightly for better clearance if total > 5?
+            // Or adjust the escape offset.
+            
+            yOffset = isRow1 ? -50 : 50; // Increased spacing to 100px gap
+            if (isMobile) {
+                yOffset = isRow1 ? -35 : 35;
+            }
+        } else {
+            const centerIndex = (total - 1) / 2;
+            xOffset = (i - centerIndex) * spacing;
+            yOffset = 0;
+        }
+
+        positions[skill.name] = {
+          x: layer.cx + xOffset,
+          y: layer.cy + yOffset,
+          color: layer.color
+        };
+      });
+    });
+    
+    return positions;
+  };
+
+  const skillPositions = getAllSkillPositions();
+
+  const connections: any[] = [
+    // 1. Infrastructure & Provisioning
+    { from: "Ansible", to: "Linux", type: "snake-center" }, 
+    { from: "Ansible", to: "Windows", type: "snake-center" },
+    { from: "vSphere", to: "Linux", type: "snake-center" }, // Top -> Bottom-Right (Systems)
+
+    // 2. CI/CD & Deployment
+    { from: "Jenkins", to: "Docker", curve: "cross-left" }, // DevOps (R2-R) -> Orch (R3-L)
+    { from: "GH Actions", to: "Docker", curve: "cross-left" },
+    { from: "ArgoCD", to: "Kubernetes", curve: "cross-left" },
+    { from: "Helm", to: "Kubernetes", curve: "cross-left" },
+    
+    // Git Connectivity (DevOps Central)
+    { from: "Git", to: "Jenkins", curve: "up-left" },
+    { from: "Git", to: "Az DevOps", curve: "up-left" },
+    { from: "Git", to: "GH Actions", curve: "up-left" },
+    { from: "Git", to: "ArgoCD", curve: "up-left" },
+    { from: "Git", to: "Helm", curve: "up-mid" },
+    { from: "Git", to: "Ansible", curve: "inner-left" },
+    { from: "Git", to: "IBM UCD", curve: "inner-left" },
+    { from: "Git", to: "Jira", curve: "inner-left" },
+
+    // 3. Container Orchestration
+    { from: "Kubernetes", to: "Docker", curve: "inner-right" },
+    { from: "Istio", to: "Kubernetes", curve: "inner-left" },
+    { from: "OpenShift", to: "Kubernetes", curve: "down-left" }, // Row 2 to Row 1
+    { from: "Anthos", to: "Kubernetes", curve: "down-right" },   // Row 2 to Row 1
+    { from: "Traefik", to: "Kubernetes", curve: "down-mid" },    // Row 2 (Middle) to Row 1 (Left)
+    { from: "Anthos", to: "GCP", curve: "up-left", type: "snake-center" }, // Orch (R3-L) -> Cloud (R1)
+
+    // Scripting & Automation Links
+    { from: "Groovy", to: "Jenkins", curve: "long-up", type: "snake-center" }, // Scripting (R3-R) -> DevOps (R2-R)
+    { from: "Bash", to: "Linux", curve: "cross-left-down", type: "snake-center" }, // Scripting (R3-R) -> Systems (R4-R) - Wait, Systems is R4-R.
+    // Scripting is R3-R. Systems is R4-R. They are stacked.
+    // Bash -> Linux is Downwards. 
+    { from: "PowerShell", to: "Windows", curve: "cross-left-down", type: "snake-center" }, 
+
+    // 4. Data & Logic
+    { from: "Python", to: "PostgreSQL", curve: "cross-left-down", type: "snake-center" }, // Dev (R3-R) -> Data (R4-L)
+    { from: "Java", to: "MySQL", curve: "cross-left-down", type: "snake-center" },
+    { from: "Vertex AI", to: "BigQuery", curve: "long-down", type: "snake-center" }, // AI (R2-L) -> Data (R4-L)
+    { from: "Kubeflow", to: "Kubernetes", type: "snake-center" }, // AI (R2-L) -> Orch (R3-L)
+    
+    // Database Cloud Integration
+    { from: "PostgreSQL", to: "GCP", type: "snake-center" },
+    { from: "PostgreSQL", to: "AWS", type: "snake-center" },
+    { from: "PostgreSQL", to: "Azure", type: "snake-center" },
+    { from: "PostgreSQL", to: "vSphere", type: "snake-center" },
+
+    { from: "MySQL", to: "GCP", type: "snake-center" },
+    { from: "MySQL", to: "AWS", type: "snake-center" },
+    { from: "MySQL", to: "Azure", type: "snake-center" },
+    { from: "MySQL", to: "vSphere", type: "snake-center" },
+
+    { from: "MongoDB", to: "GCP", type: "snake-center" },
+    { from: "MongoDB", to: "AWS", type: "snake-center" },
+    { from: "MongoDB", to: "Azure", type: "snake-center" },
+    { from: "MongoDB", to: "vSphere", type: "snake-center" },
+
+    { from: "MS SQL", to: "GCP", type: "snake-center" },
+    { from: "MS SQL", to: "AWS", type: "snake-center" },
+    { from: "MS SQL", to: "Azure", type: "snake-center" },
+    { from: "MS SQL", to: "vSphere", type: "snake-center" },
+
+    { from: "DynamoDB", to: "AWS", type: "snake-center" },
+    { from: "Cassandra", to: "GCP", type: "snake-center" },
+
+    { from: "Snowflake", to: "GCP", type: "snake-center" },
+    { from: "Snowflake", to: "AWS", type: "snake-center" },
+    { from: "Snowflake", to: "Azure", type: "snake-center" },
+    { from: "Snowflake", to: "vSphere", type: "snake-center" },
+
+    // 5. Cloud Specifics
+    { from: "SageMaker", to: "AWS", curve: "up-right", type: "snake-center" }, // AI (R2-L) -> Cloud (R1)
+    { from: "Vertex AI", to: "GCP", curve: "up-left", type: "snake-center" },
+    { from: "Azure AI", to: "Azure", curve: "up-mid", type: "snake-center" },
+    
+    // Hardware Acceleration (AI -> Cloud)
+    { from: "HGX/DGX", to: "GCP", curve: "up-right", type: "snake-center" },
+    { from: "HGX/DGX", to: "AWS", curve: "up-right", type: "snake-center" },
+    { from: "HGX/DGX", to: "Azure", curve: "up-right", type: "snake-center" },
+    { from: "HGX/DGX", to: "vSphere", curve: "up-right", type: "snake-center" },
+
+    // 6. Systems & Servers (Intra-Group)
+    { from: "Linux", to: "RHEL", curve: "inner-right" },
+    { from: "Linux", to: "Ubuntu", curve: "inner-right" },
+    { from: "Linux", to: "CentOS", curve: "inner-right" },
+    { from: "Linux", to: "Nginx", curve: "inner-right" },
+    { from: "Linux", to: "HAProxy", curve: "inner-right" }, 
+    { from: "Linux", to: "Tomcat", curve: "inner-right" },
+    { from: "Windows", to: "HAProxy", curve: "inner-right" },
+    { from: "Windows", to: "Tomcat", curve: "inner-right" },
+
+    // 7. Observability & Monitoring
+    { from: "Prometheus", to: "Grafana", curve: "inner-right" }, // Local
+    
+    // Cloud Native Monitoring
+    { from: "AWS", to: "CloudWatch", type: "snake-center" },
+    { from: "Azure", to: "Az Monitor", type: "snake-center" },
+
+    // Observability -> Cloud Providers (Matrix)
+    // Prometheus
+    { from: "GCP", to: "Prometheus", type: "snake-center" },
+    { from: "AWS", to: "Prometheus", type: "snake-center" },
+    { from: "Azure", to: "Prometheus", type: "snake-center" },
+    { from: "vSphere", to: "Prometheus", type: "snake-center" },
+
+    // Splunk
+    { from: "GCP", to: "Splunk", type: "snake-center" },
+    { from: "AWS", to: "Splunk", type: "snake-center" },
+    { from: "Azure", to: "Splunk", type: "snake-center" },
+    { from: "vSphere", to: "Splunk", type: "snake-center" },
+
+    // Datadog
+    { from: "GCP", to: "Datadog", type: "snake-center" },
+    { from: "AWS", to: "Datadog", type: "snake-center" },
+    { from: "Azure", to: "Datadog", type: "snake-center" },
+    { from: "vSphere", to: "Datadog", type: "snake-center" },
+
+    // New Relic
+    { from: "GCP", to: "New Relic", type: "snake-center" },
+    { from: "AWS", to: "New Relic", type: "snake-center" },
+    { from: "Azure", to: "New Relic", type: "snake-center" },
+    { from: "vSphere", to: "New Relic", type: "snake-center" },
+
+    // Nagios
+    { from: "GCP", to: "Nagios", type: "snake-center" },
+    { from: "AWS", to: "Nagios", type: "snake-center" },
+    { from: "Azure", to: "Nagios", type: "snake-center" },
+    { from: "vSphere", to: "Nagios", type: "snake-center" },
+
+    // Wiz
+    { from: "GCP", to: "Wiz", type: "snake-center" },
+    { from: "AWS", to: "Wiz", type: "snake-center" },
+    { from: "Azure", to: "Wiz", type: "snake-center" },
+    { from: "vSphere", to: "Wiz", type: "snake-center" }
+  ];
+
   // Helper to distribute points in an ellipse
   const distributeSkills = (skills, cx, cy, rx, ry) => {
     if (!skills || skills.length === 0) return [];
@@ -330,6 +529,18 @@ const SkillsArchitecture = () => {
           .animate-spin-slow {
             animation: spin-slow 20s linear infinite;
             transform-origin: center;
+          }
+          @keyframes dash-flow {
+            to { stroke-dashoffset: -20; }
+          }
+          .animate-flow {
+            animation: dash-flow 1s linear infinite;
+          }
+           @keyframes packet-travel {
+            0% { offset-distance: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { offset-distance: 100%; opacity: 0; }
           }
         `}</style>
         <defs>
@@ -471,11 +682,11 @@ const SkillsArchitecture = () => {
             </g>
             )}
 
-            {/* 4. Animated Ring (CSS Animation) */}
+            {/* 4. Static Ring (Frozen Animation) */}
             <g style={{ 
               transform: `translate(${layer.cx}px, ${layer.cy}px)` 
             }}>
-               <g className="animate-spin-slow" style={{ transformOrigin: 'center', transformBox: 'fill-box' }}>
+               <g style={{ transformOrigin: 'center', transformBox: 'fill-box' }}>
                   <ellipse 
                     cx={0} 
                     cy={0} 
@@ -589,6 +800,165 @@ const SkillsArchitecture = () => {
             */}
           </g>
         ))}
+
+        {/* Connections Layer (Foreground) */}
+        <g className="connections-layer pointer-events-none data-connections">
+          {connections.map((conn, idx) => {
+            const start = skillPositions[conn.from];
+            const end = skillPositions[conn.to];
+            
+            if (!start || !end) return null;
+
+            // Simple line if no curve, or Curved Path if specified
+            // Use snake-center logic if type matches OR if curve implies heavy crossing
+            // REMOVED 'up-' check because local connections (like Git -> Jenkins) also use 'up-' but should stay inside.
+            // Snake connections MUST specify type="snake-center" explicitly.
+            const useSnakeLogic = conn.type === "snake-center" || 
+                                conn.curve?.includes("cross") ||
+                                conn.curve?.includes("long-down");
+
+            if (useSnakeLogic) {
+                const ICON_RADIUS = 22; // 18px radius + 4px gap
+                
+                // FORCE BOTTOM START: Always start from bottom of icon
+                const startY = start.y + ICON_RADIUS;
+                
+                // Determine vertical drop to "Gap" or "Escape Zone"
+                // For Row 1 items (which are usually higher), we want to drop into the gap between rows.
+                // Row 1 y is roughly cy - 45. Gap is around cy. drop ~45px.
+                // Row 2 y is roughly cy + 35. Drop down below them?
+                // Heuristic: If we are in top row (relative to others in this group), drop meaningful amount.
+                // But simplified: Just always drop down 30px first to clear the icon, then turn.
+                
+                const escapeY = startY + 30; // Move down into the gap (or below the single row)
+                
+                // Determine center column X for highway
+                const centerX = isMobile ? 200 : 600;
+
+                // Adjust Y entry points to center channel
+                // We are coming from specific escapeY. 
+                // To avoid cutting through other things, let's keep the channel entry near that Y if possible, 
+                // or slope gently.
+                const centerEntryY = escapeY; // Enter highway at the level we escaped to
+                
+                // Target Handling
+                // Specific override for Cloud skills to always connect at bottom if they are the target
+                const isCloudTarget = ["AWS", "GCP", "Azure", "vSphere"].includes(conn.to);
+                const isCloudSource = ["AWS", "GCP", "Azure", "vSphere"].includes(conn.from);
+                
+                // Direction Logic
+                const isDownwards = end.y > start.y;
+                
+                // End Point Logic
+                // Default: Top if going down, Bottom if going up.
+                // Override: If Cloud is target, ALWAYS hit bottom (+ICON_RADIUS).
+                let endY = end.y + (isDownwards ? -ICON_RADIUS : ICON_RADIUS);
+                
+                if (isCloudTarget) {
+                    endY = end.y + ICON_RADIUS;
+                }
+
+                // Start Point Logic
+                // Force bottom start always (already done by startY = start.y + ICON_RADIUS)
+                
+                // Control Points for Entry to Target
+                // If hitting bottom (endY > end.y), we should come from below.
+                const isHittingBottom = endY > end.y;
+                const targetEntryY = isHittingBottom ? endY + 40 : endY - 40;
+                
+                // Define entryY (missing in previous edit)
+                const entryY = escapeY + (isDownwards ? 20 : -20);
+
+                // Control Point for final curve
+                // If hitting bottom, curve should be below the target.
+                const controlCPY = isHittingBottom ? endY + 20 : endY - 20;
+
+                const pathData = `
+                  M ${start.x} ${startY}
+                  L ${start.x} ${escapeY}
+                  Q ${start.x} ${entryY}, ${centerX} ${entryY} 
+                  L ${centerX} ${targetEntryY}
+                  Q ${centerX} ${controlCPY}, ${end.x} ${controlCPY}
+                  L ${end.x} ${endY}
+                `;
+
+
+                return (
+                  <g key={idx}>
+                    {/* Base Path (Dashed) */}
+                    <path 
+                      id={`conn-path-${idx}`}
+                      d={pathData}
+                      fill="none"
+                      stroke={isMobile ? "#94a3b8" : "#94a3b8"} 
+                      strokeWidth="2"
+                      strokeDasharray="4,4"
+                      opacity="0.3"
+                    />
+                    
+                    {/* Animated Packet */}
+                    <circle r="3" fill={start.color || "#38bdf8"} style={{ filter: `drop-shadow(0 0 8px ${start.color || '#38bdf8'})` }}>
+                      <animateMotion dur="6s" repeatCount="indefinite" path={pathData} calcMode="linear" />
+                    </circle>
+
+                    {/* Endpoints */}
+                    <circle cx={start.x} cy={startY} r="3" fill="#64748b" />
+                    <circle cx={end.x} cy={endY} r="3" fill="#64748b" />
+                  </g>
+                );
+            }
+
+            // GENERIC CURVE HANDLER (Simple Quadratic for local connections)
+            
+            // Adjust offsets for simple curves
+            const ICON_RADIUS_H = 24; // slightly larger for horizontal
+            const sX = start.x > end.x ? start.x - ICON_RADIUS_H : start.x + ICON_RADIUS_H;
+            const eX = end.x > start.x ? end.x - ICON_RADIUS_H : end.x + ICON_RADIUS_H; 
+            
+            const midX = (sX + eX) / 2;
+            const midY = (start.y + end.y) / 2;
+            
+            // Simple inner arcs
+            let curveOffset = 30;
+            if (conn.curve === "inner-up" || conn.curve?.includes("up-")) curveOffset = -30;
+            if (conn.curve === "inner-flat") curveOffset = 0;
+            
+            // If vertical distance is large (different rows), reduce the arc intensity 
+            if (Math.abs(start.y - end.y) > 40) {
+                curveOffset = 0; // Straighter line for vertical jumps
+            }
+
+            let curvePath = `M ${sX} ${start.y} Q ${midX} ${midY + (conn.curve === "inner-right" ? 30 : curveOffset)} ${eX} ${end.y}`; 
+
+            if (conn.curve === "long-right") {
+               // vSphere -> Linux
+               curvePath = `M ${sX} ${start.y} C ${sX + 80} ${start.y}, ${eX + 80} ${end.y}, ${eX} ${end.y}`;
+            }
+
+            return (
+              <g key={idx}>
+                {/* Connection Line */}
+                <path 
+                  d={curvePath}
+                  fill="none"
+                  stroke={start.color || "#94a3b8"} 
+                  strokeWidth="2"
+                  strokeDasharray="4,4"
+                  opacity="0.5"
+                  className="animate-flow"
+                />
+                {/* Animated Packet */}
+                <circle r="3" fill={start.color || "#38bdf8"} style={{ filter: `drop-shadow(0 0 8px ${start.color || '#38bdf8'})` }}>
+                    <animateMotion dur="4s" repeatCount="indefinite" path={curvePath} calcMode="linear" />
+                </circle>
+                
+                {/* Small dot at start/end */}
+                <circle cx={sX} cy={start.y} r="3" fill={start.color || "#64748b"} />
+                <circle cx={eX} cy={end.y} r="3" fill={end.color || "#64748b"} />
+              </g>
+            );
+          })}
+        </g>
       </svg>
     </div>
   );
