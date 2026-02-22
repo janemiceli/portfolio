@@ -123,6 +123,20 @@ const SkillsArchitecture = () => {
         { name: "Snowflake", icon: "https://www.vectorlogo.zone/logos/snowflake/snowflake-icon.svg" }
       ];
 
+      // Observability Skills (9 items)
+      const observabilitySkills = [
+        { name: "Prometheus", icon: "https://icon.icepanel.io/Technology/svg/Prometheus.svg" },
+        { name: "Grafana", icon: "https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg" },
+        { name: "Splunk", icon: "https://www.vectorlogo.zone/logos/splunk/splunk-icon.svg" },
+        { name: "Datadog", icon: "https://www.vectorlogo.zone/logos/datadoghq/datadoghq-icon.svg" },
+        { name: "New Relic", icon: "https://www.vectorlogo.zone/logos/newrelic/newrelic-icon.svg" },
+        { name: "Nagios", icon: "https://www.vectorlogo.zone/logos/nagios/nagios-icon.svg" },
+        { name: "GCP Mon", icon: "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" },
+        { name: "CloudWatch", icon: "https://www.vectorlogo.zone/logos/amazon_cloudwatch/amazon_cloudwatch-icon.svg" }, // Usually orange/pink
+        // { name: "Az Monitor", icon: "https://az-icons.com/export/icons/227729af9ea80e3e85ca0beb68343780.svg" },
+        { name: "Wiz", icon: "https://cdn.worldvectorlogo.com/logos/wiz-1.svg" }
+      ];
+
       // Dev & Scripting (5 items)
       const devScriptingSkills = [
         { name: "Python", icon: "https://www.vectorlogo.zone/logos/python/python-icon.svg" },
@@ -149,9 +163,11 @@ const SkillsArchitecture = () => {
         { id: "ai_hpc", title: "AI & HPC", color: "#d946ef", cx: centerX, cy: startY + gapY, skills: aiSkills },
         { id: "devops", title: "DevOps & Automation", color: "#3b82f6", cx: centerX, cy: startY + gapY * 2, skills: devOpsSkills },
         { id: "containers", title: "Orchestration", color: "#6366f1", cx: centerX, cy: startY + gapY * 3, skills: orchestrationSkills },
-        { id: "data", title: "Data & Persistence", color: "#8b5cf6", cx: centerX, cy: startY + gapY * 4, skills: dataSkills },
-        { id: "systems", title: "Systems & Servers", color: "#06b6d4", cx: centerX, cy: startY + gapY * 5, skills: systemsSkills }, 
-        { id: "dev_scripting", title: "Dev & Scripting", color: "#14b8a6", cx: centerX, cy: startY + gapY * 6, skills: devScriptingSkills },
+        // Need to insert Observability here?
+        { id: "observability", title: "Observability", color: "#8b5cf6", cx: centerX, cy: startY + gapY * 4, skills: observabilitySkills },
+        { id: "data", title: "Data & Persistence", color: "#a855f7", cx: centerX, cy: startY + gapY * 5, skills: dataSkills },
+        { id: "systems", title: "Systems & Servers", color: "#06b6d4", cx: centerX, cy: startY + gapY * 6, skills: systemsSkills }, 
+        { id: "dev_scripting", title: "Dev & Scripting", color: "#14b8a6", cx: centerX, cy: startY + gapY * 7, skills: devScriptingSkills },
       ];
     } else {
         // ORIGINAL DESKTOP LAYOUT
@@ -184,6 +200,19 @@ const SkillsArchitecture = () => {
             { name: "Anthos", icon: "https://icon.icepanel.io/GCP/svg/Anthos.svg" }, 
             { name: "Traefik", icon: "https://icon.icepanel.io/Technology/svg/Traefik-Mesh.svg" },
             { name: "OpenShift", icon: "https://www.vectorlogo.zone/logos/openshift/openshift-icon.svg" }
+        ];
+
+        // Observability Skills
+        const observabilitySkills = [
+            { name: "Prometheus", icon: "https://icon.icepanel.io/Technology/svg/Prometheus.svg" },
+            { name: "Grafana", icon: "https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg" },
+            { name: "Splunk", icon: "https://www.vectorlogo.zone/logos/splunk/splunk-icon.svg" },
+            { name: "Datadog", icon: "https://www.vectorlogo.zone/logos/datadoghq/datadoghq-icon.svg" },
+            { name: "New Relic", icon: "https://www.vectorlogo.zone/logos/newrelic/newrelic-icon.svg" },
+            { name: "Nagios", icon: "https://www.vectorlogo.zone/logos/nagios/nagios-icon.svg" },
+            { name: "CloudWatch", icon: "https://www.vectorlogo.zone/logos/amazon_cloudwatch/amazon_cloudwatch-icon.svg" },
+            { name: "Az Monitor", icon: "https://az-icons.com/export/icons/227729af9ea80e3e85ca0beb68343780.svg" },
+            { name: "Wiz", icon: "https://cdn.worldvectorlogo.com/logos/wiz-1.svg" }
         ];
 
         // Data & Persistence (8 items)
@@ -224,13 +253,37 @@ const SkillsArchitecture = () => {
             { id: "cloud_virt", title: "Cloud & Virtualization", color: "#ec4899", cx: 600, cy: 110, skills: skillsList },
             // --- ROW 2 (LOGIC & DATA) ---
             { id: "ai_hpc", title: "AI & HPC", color: "#d946ef", cx: 310, cy: 320, skills: aiSkills },
+            // { id: "devops", title: "DevOps & Automation", color: "#3b82f6", cx: 890, cy: 320, skills: devOpsSkills },
+            
+            // Wait, we have 4 rows effectively with current layout 1-2-2-2. 
+            // Total 7 categories before -> now 8.
+            // 8 categories in a 1-2-2-2-1 layout? Or 1-3-3-1?
+            // Let's try 1-2-2-3? 
+            
+            // Row 1: Cloud (1)
+            // Row 2: AI (L) + DevOps (R)  -> 2
+            // Row 3: Orchestration (L) + Observability (R) -> 2
+            // Row 4: Data (L) + Systems (R) + Dev (Center) -> 3? No too crowded.
+            
+            // Let's do 4 rows of 2? No start is 1.
+            // R1: Cloud
+            // R2: AI + DevOps
+            // R3: Orch + Observability
+            // R4: Data + Systems
+            // R5: Dev (Bottom Center)
+            
             { id: "devops", title: "DevOps & Automation", color: "#3b82f6", cx: 890, cy: 320, skills: devOpsSkills },
-            // --- ROW 3 (RUNTIME & OPS) ---
+            
+            // --- ROW 3 ---
             { id: "containers", title: "Orchestration", color: "#6366f1", cx: 310, cy: 560, skills: orchestrationSkills },
-            { id: "data", title: "Data & Persistence", color: "#8b5cf6", cx: 890, cy: 560, skills: dataSkills },
-            // --- ROW 4 (INFRASTRUCTURE) ---
-            { id: "systems", title: "Systems & Servers", color: "#06b6d4", cx: 310, cy: 800, skills: systemsSkills },
-            { id: "dev_scripting", title: "Dev & Scripting", color: "#14b8a6", cx: 890, cy: 800, skills: devScriptingSkills }
+            { id: "dev_scripting", title: "Dev & Scripting", color: "#14b8a6", cx: 890, cy: 560, skills: devScriptingSkills },
+            
+            // --- ROW 4 ---
+            { id: "data", title: "Data & Persistence", color: "#a855f7", cx: 310, cy: 800, skills: dataSkills },
+            { id: "systems", title: "Systems & Servers", color: "#06b6d4", cx: 890, cy: 800, skills: systemsSkills },
+            
+            // --- ROW 5 ---
+            { id: "observability", title: "Observability", color: "#8b5cf6", cx: 600, cy: 1040, skills: observabilitySkills }
         ];
     }
   };
