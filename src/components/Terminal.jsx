@@ -1,193 +1,231 @@
 import React, { useEffect, useRef } from "react";
-import xtermPkg from "xterm";
-import { FitAddon } from "@xterm/addon-fit";
-import { WebLinksAddon } from "@xterm/addon-web-links";
 import "xterm/css/xterm.css";
 
-const { Terminal: XTerm } = xtermPkg;
+export default function Terminal() {
+  const terminalRef = useRef(null);
 
   useEffect(() => {
     if (!terminalRef.current) return;
 
-    // Initialize xterm.js
-    const term = new XTerm({
-      cursorBlink: true,
-      theme: {
-        background: '#1e1e1e',
-        foreground: '#f8f8f2',
-        cursor: '#10b981', // emerald-500
-        selectionBackground: '#4b5563',
-      },
-      fontFamily: '"Fira Code", monospace',
-      fontSize: 14,
-      lineHeight: 1.2,
-    });
+    let term;
 
-    const fitAddon = new FitAddon();
-    const webLinksAddon = new WebLinksAddon();
+    const start = async () => {
+      // Dynamic imports prevent Astro/Vite SSR build issues + handle CJS/ESM quirks
+      const xtermMod = await import("xterm");
+      const fitMod = await import("@xterm/addon-fit");
+      const linksMod = await import("@xterm/addon-web-links");
 
-    term.loadAddon(fitAddon);
-    term.loadAddon(webLinksAddon);
+      const XTerm =
+        xtermMod.Terminal ??
+        xtermMod.default?.Terminal ??
+        xtermMod.default; // last resort
 
-    term.open(terminalRef.current);
-    
-    // Tiny delay to ensure DOM is ready for fit and focus
-    setTimeout(() => {
-      fitAddon.fit();
-      term.focus();
-    }, 50);
+      const FitAddon = fitMod.FitAddon ?? fitMod.default?.FitAddon ?? fitMod.default;
+      const WebLinksAddon =
+        linksMod.WebLinksAddon ?? linksMod.default?.WebLinksAddon ?? linksMod.default;
 
-    xtermRef.current = term;
+      term = new XTerm({
+        cursorBlink: true,
+        theme: {
+          background: "#0b1220",
+          foreground: "#e5e7eb",
+          cursor: "#10b981",
+          selectionBackground: "#334155",
+        },
+        fontFamily:
+          '"Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+        fontSize: 14,
+        lineHeight: 1.2,
+      });
 
-    // Initial welcome message
-    term.writeln('\x1b[1;32mWelcome to Akash Verma\'s Interactive Portfolio\x1b[0m');
-    term.writeln('Type \x1b[1;33mhelp\x1b[0m to see available commands.');
-    term.writeln('');
-    prompt(term);
+      const fitAddon = new FitAddon();
+      const webLinksAddon = new WebLinksAddon();
+      term.loadAddon(fitAddon);
+      term.loadAddon(webLinksAddon);
 
-    let currentLine = '';
-    
-    // Handle input
-    term.onData((data) => {
-      const code = data.charCodeAt(0);
-      
-      // Enter key (13 is CR)
-      if (code === 13) {
-        term.write('\r\n');
-        handleCommand(currentLine.trim(), term);
-        currentLine = '';
-        prompt(term);
-      } 
-      // Backspace (127 is DEL)
-      else if (code === 127) {
-        if (currentLine.length > 0) {
-          currentLine = currentLine.slice(0, -1);
-          term.write('\b \b');
+      term.open(terminalRef.current);
+
+      // Fit/focus after DOM paint
+      setTimeout(() => {
+        try {
+          fitAddon.fit();
+          term.focus();
+        } catch {}
+      }, 50);
+
+      const prompt = () => {
+        term.write("\x1b[1;32mguest@jane-portfolio\x1b[0m:\x1b[1;34m~\x1b[0m$ ");
+      };
+
+      const banner = () => {
+        term.writeln("\x1b[1;32mWelcome to Jane Miceli's Interactive Portfolio\x1b[0m");
+        term.writeln("Type \x1b[1;33mhelp\x1b[0m to see available commands.");
+        term.writeln("");
+      };
+
+      const handleCommand = (cmd) => {
+        const args = cmd.trim().split(/\s+/).filter(Boolean);
+        const command = (args[0] || "").toLowerCase();
+
+        switch (command) {
+          case "":
+            return;
+
+          case "help":
+            term.writeln("Available commands:");
+            term.writeln("  \x1b[1;33mwhoami\x1b[0m       - Profile summary");
+            term.writeln("  \x1b[1;33mskills\x1b[0m      - Core skill areas");
+            term.writeln("  \x1b[1;33mexperience\x1b[0m  - Quick timeline");
+            term.writeln("  \x1b[1;33meducation\x1b[0m   - Education highlights");
+            term.writeln("  \x1b[1;33mcerts\x1b[0m       - Certifications highlights");
+            term.writeln("  \x1b[1;33mcontact\x1b[0m     - Contact links");
+            term.writeln("  \x1b[1;33mclear\x1b[0m       - Clear the terminal");
+            term.writeln('  \x1b[1;30mTry "coffee" or "sudo rm -rf /"\x1b[0m');
+            return;
+
+          case "whoami":
+            term.writeln("Jane Miceli — Technology Leader");
+            term.writeln("People-first leader focused on growth, scalability, and healthy operations.");
+            term.writeln(
+              "Domains: Software Engineering, Architecture, DevOps, SRE, Operations, Incident Mgmt."
+            );
+            return;
+
+          case "skills":
+            term.writeln("\x1b[1;34mCore\x1b[0m: Software Engineering, Architecture, DevOps, SRE, Operations");
+            term.writeln("\x1b[1;34mLeadership\x1b[0m: Team building, psychological safety, servant leadership");
+            term.writeln("\x1b[1;34mDelivery\x1b[0m: Agile methodologies, product-minded execution");
+            term.writeln("\x1b[1;34mReliability\x1b[0m: Incident management, continuous improvement, reducing toil");
+            return;
+
+          case "experience":
+            term.writeln("\x1b[1;34mRecent\x1b[0m:");
+            term.writeln(" • Senior Manager, Site Reliability Engineering — Kohl's (2021–2023)");
+            term.writeln(" • Principal Engineer & Team Lead, DevOps Now — IBM (2019–2021)");
+            term.writeln(" • Cloud Enterprise Architect — Micron (2018–2019)");
+            term.writeln(" • Lead, Senior Site Reliability Engineer — HP Inc (2014–2018)");
+            term.writeln("Open: /portfolio/experience/ for the full timeline.");
+            return;
+
+          case "education":
+            term.writeln("\x1b[1;34mEducation\x1b[0m:");
+            term.writeln(" • Berkeley CTO Program — UC Berkeley (2025–2026)");
+            term.writeln(" • M.S. — University of Wisconsin–Milwaukee (2004–2008)");
+            term.writeln(" • B.S. — University of Wisconsin–Milwaukee (2000–2004)");
+            return;
+
+          case "certs":
+          case "cert":
+          case "certifications":
+            term.writeln("\x1b[1;34mCertifications (highlights)\x1b[0m:");
+            term.writeln(" • Certified Facilitator — Scrum Alliance (2024)");
+            term.writeln(" • Certified Agile Leader — Scrum Alliance (2022)");
+            term.writeln(" • Women in Leadership — eCornell (2022)");
+            term.writeln("Open: /portfolio/certifications/ for full list + verification links.");
+            return;
+
+          case "contact":
+            term.writeln("Email: jane+github@janemiceli.com");
+            term.writeln("LinkedIn: https://www.linkedin.com/in/janemiceli");
+            term.writeln("GitHub: https://github.com/janemiceli");
+            return;
+
+          case "clear":
+            term.clear();
+            return;
+
+          case "sudo": {
+            const rest = args.slice(1).join(" ");
+            if (rest === "rm -rf /") {
+              term.writeln("\x1b[1;31mNice try. Change window required.\x1b[0m");
+            } else {
+              // IMPORTANT: no raw newline inside quotes
+              term.writeln("User is not in the sudoers file.");
+              term.writeln("This incident will be reported.");
+            }
+            return;
+          }
+
+          case "coffee":
+            term.writeln(" ( (");
+            term.writeln("  ) )");
+            term.writeln(" ........");
+            term.writeln(" | |]");
+            term.writeln(" \\\\ /");
+            term.writeln("  `----'");
+            term.writeln("Caffeine level: \x1b[1;32mOPTIMAL\x1b[0m");
+            return;
+
+          case "cat":
+            term.writeln("Meow.");
+            return;
+
+          default:
+            term.writeln(`Command not found: ${command}. Type 'help' for commands.`);
+            return;
         }
-      } 
-      // Printable characters (basic range check + extended ASCII)
-      else if (code >= 32) {
-        currentLine += data;
-        term.write(data);
-      }
-    });
+      };
 
-    // Handle resize
-    const handleResize = () => {
-      fitAddon.fit();
+      banner();
+      prompt();
+
+      let currentLine = "";
+
+      term.onData((data) => {
+        const code = data.charCodeAt(0);
+
+        // Enter
+        if (code === 13) {
+          term.write("\r\n");
+          handleCommand(currentLine);
+          currentLine = "";
+          prompt();
+          return;
+        }
+
+        // Backspace
+        if (code === 127) {
+          if (currentLine.length > 0) {
+            currentLine = currentLine.slice(0, -1);
+            term.write("\b \b");
+          }
+          return;
+        }
+
+        // Printable
+        if (code >= 32) {
+          currentLine += data;
+          term.write(data);
+        }
+      });
+
+      const onResize = () => {
+        try {
+          fitAddon.fit();
+        } catch {}
+      };
+
+      window.addEventListener("resize", onResize);
+      terminalRef.current.addEventListener("click", () => term.focus());
+
+      // cleanup
+      return () => {
+        window.removeEventListener("resize", onResize);
+      };
     };
-    window.addEventListener('resize', handleResize);
-    
-    const handleFocus = () => {
-      term.focus();
-    };
-    
-    // Add click listener to the container div
-    if (terminalRef.current) {
-      terminalRef.current.addEventListener('click', handleFocus);
-    }
+
+    let cleanup = null;
+    start().then((c) => (cleanup = c));
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      if (terminalRef.current) {
-        terminalRef.current.removeEventListener('click', handleFocus);
-      }
-      term.dispose();
+      try {
+        cleanup?.();
+      } catch {}
+      try {
+        term?.dispose();
+      } catch {}
     };
   }, []);
 
-  const prompt = (term) => {
-    term.write('\x1b[1;32mguest@akash-portfolio\x1b[0m:\x1b[1;34m~\x1b[0m$ ');
-  };
-
-  const handleCommand = (cmd, term) => {
-    const args = cmd.split(' ');
-    const command = args[0].toLowerCase();
-
-    switch (command) {
-      case 'help':
-        term.writeln('Available commands:');
-        term.writeln('  \x1b[1;33mwhoami\x1b[0m    - Display profile summary');
-        term.writeln('  \x1b[1;33mskills\x1b[0m    - List technical skills');
-        term.writeln('  \x1b[1;33mcerts\x1b[0m     - List certifications');
-        term.writeln('  \x1b[1;33mcontact\x1b[0m   - Show contact information');
-        term.writeln('  \x1b[1;33mclear\x1b[0m     - Clear the terminal');
-        term.writeln('  \x1b[1;30m(Try "coffee", "sudo rm -rf /", or "git blame")\x1b[0m');
-        break;
-      case 'whoami':
-        term.writeln('Akash Verma - Site Reliability Engineer & Cloud Architect');
-        term.writeln('Over a decade of expertise in designing, automating, and scaling');
-        term.writeln('infrastructure across hybrid cloud and HPC environments.');
-        break;
-      case 'skills':
-        term.writeln('\x1b[1;34mCloud:\x1b[0m AWS, Azure, GCP');
-        term.writeln('\x1b[1;34mAI/ML:\x1b[0m Google Vertex AI, HPC, Nvidia DGX');
-        term.writeln('\x1b[1;34mCI/CD:\x1b[0m Jenkins, GitHub Actions, Argo CD');
-        term.writeln('\x1b[1;34mIaC:\x1b[0m   Terraform, Ansible');
-        break;
-      case 'certifications':
-      case 'certs':
-      case 'cert':
-        term.writeln('\x1b[1;34m--- Google Cloud ---\x1b[0m');
-        term.writeln('  • Professional Cloud Architect');
-        term.writeln('  • Associate Cloud Engineer');
-        term.writeln('  • Generative AI Leader');
-        term.writeln('  • Site Reliability Engineering (SRE)');
-        term.writeln('');
-        term.writeln('\x1b[1;34m--- Microsoft Azure ---\x1b[0m');
-        term.writeln('  • Azure Administrator Associate');
-        term.writeln('  • Azure Fundamentals');
-        term.writeln('');
-        term.writeln('\x1b[1;34m--- Other ---\x1b[0m');
-        term.writeln('  • GitHub Foundations');
-        term.writeln('');
-        term.writeln('Type \x1b[1;33mhelp\x1b[0m to see more commands.');
-        break;
-      case 'contact':
-        term.writeln('Email: averma7304@gmail.com');
-        term.writeln('Phone: 9133886757');
-        term.writeln('LinkedIn: https://www.linkedin.com/in/akashv01/');
-        break;
-      case 'clear':
-        term.clear();
-        break;
-      case 'sudo':
-        if (args[1] === 'rm' && args[2] === '-rf' && args[3] === '/') {
-          term.writeln('\x1b[1;31mNice try, but I keep my backups on a different continent.\x1b[0m');
-        } else {
-          term.writeln('User is not in the sudoers file. This incident will be reported.');
-        }
-        break;
-      case 'coffee': 
-        term.writeln('    ( (');
-        term.writeln('     ) )');
-        term.writeln('  ........');
-        term.writeln('  |      |]');
-        term.writeln('  \\      /');
-        term.writeln('   `----\'');
-        term.writeln('Caffeine level: \x1b[1;32mOPTIMAL\x1b[0m');
-        break;
-      case 'git':
-        if (args[1] === 'blame') {
-          term.writeln('It was definitely the intern.');
-        } else {
-          term.writeln('git: command not found (just kidding, but try "git blame")');
-        }
-        break;
-      case 'cat':
-         term.writeln('Meow. 🐱');
-         break;
-      case 'ls':
-         term.writeln('src/  public/  node_modules/ (don\'t look in there)  resume.pdf');
-         break;
-      case '':
-        break;
-      default:
-        term.writeln(`Command not found: ${command}. Type 'help' for available commands.`);
-    }
-  };
-
-  return <div ref={terminalRef} className="h-full w-full" />;
-};
-
-export default Terminal;
+  return <div ref={terminalRef} className="mt-8 min-h-[260px] rounded-xl border border-slate-800" />;
+}
