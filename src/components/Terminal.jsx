@@ -100,6 +100,7 @@ export default function Terminal() {
 
           case "experience":
             term.writeln("\x1b[1;34mRecent\x1b[0m:");
+            term.writeln(" • Engineering Manager — SRE / Ops / Cloud Infra — TouchNet (Feb 2024–Present)");
             term.writeln(" • Senior Manager, Site Reliability Engineering — Kohl's (2021–2023)");
             term.writeln(" • Principal Engineer & Team Lead, DevOps Now — IBM (2019–2021)");
             term.writeln(" • Cloud Enterprise Architect — Micron (2018–2019)");
