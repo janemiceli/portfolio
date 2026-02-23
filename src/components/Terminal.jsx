@@ -127,11 +127,23 @@ const Terminal = () => {
         term.writeln('\x1b[1;34mCI/CD:\x1b[0m Jenkins, GitHub Actions, Argo CD');
         term.writeln('\x1b[1;34mIaC:\x1b[0m   Terraform, Ansible');
         break;
+      case 'certifications':
       case 'certs':
-        term.writeln('\x1b[1;34mGoogle:\x1b[0m Cloud Engineer, Prof. Cloud Architect');
-        term.writeln('\x1b[1;34mAI:\x1b[0m     Generative AI Leader');
-        term.writeln('\x1b[1;34mAzure:\x1b[0m  Fundamentals, Administrator Associate');
-        term.writeln('\x1b[1;34mOther:\x1b[0m  GitHub Foundations, SRE');
+      case 'cert':
+        term.writeln('\x1b[1;34m--- Google Cloud ---\x1b[0m');
+        term.writeln('  • Professional Cloud Architect');
+        term.writeln('  • Associate Cloud Engineer');
+        term.writeln('  • Generative AI Leader');
+        term.writeln('  • Site Reliability Engineering (SRE)');
+        term.writeln('');
+        term.writeln('\x1b[1;34m--- Microsoft Azure ---\x1b[0m');
+        term.writeln('  • Azure Administrator Associate');
+        term.writeln('  • Azure Fundamentals');
+        term.writeln('');
+        term.writeln('\x1b[1;34m--- Other ---\x1b[0m');
+        term.writeln('  • GitHub Foundations');
+        term.writeln('');
+        term.writeln('Type \x1b[1;33mhelp\x1b[0m to see more commands.');
         break;
       case 'contact':
         term.writeln('Email: averma7304@gmail.com');

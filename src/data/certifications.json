@@ -1,0 +1,86 @@
+[
+  {
+    "id": "CERT-GCP-GENAI",
+    "name": "Generative AI Leader Certification",
+    "provider": "Google Cloud",
+    "status": "ACTIVE",
+    "issued": "2025-10-28",
+    "expires": "2028-10-28",
+    "credentialId": "231b9e41-8252-4554-8daa-1780e8393e40",
+    "verifyUrl": "https://www.credly.com/badges/231b9e41-8252-4554-8daa-1780e8393e40",
+    "image": "https://images.credly.com/size/340x340/images/ec23e41a-0f32-4a98-9c00-28925621b281/blob",
+    "color": "text-blue-500"
+  },
+  {
+    "id": "CERT-GCP-ACE",
+    "name": "Associate Cloud Engineer Certification",
+    "provider": "Google Cloud",
+    "status": "ACTIVE",
+    "issued": "2025-11-11",
+    "expires": "2028-11-11",
+    "credentialId": "1177a2da-fa8f-468e-b745-5fefa088c719",
+    "verifyUrl": "https://www.credly.com/badges/1177a2da-fa8f-468e-b745-5fefa088c719",
+    "image": "https://images.credly.com/size/340x340/images/08096465-cbfc-4c3e-93e5-93c5aa61f23e/image.png",
+    "color": "text-blue-500"
+  },
+  {
+    "id": "CERT-GCP-PCA",
+    "name": "Professional Cloud Architect Certification",
+    "provider": "Google Cloud",
+    "status": "ACTIVE",
+    "issued": "2025-12-03",
+    "expires": "2027-12-03",
+    "credentialId": "34f021b6-0ff4-43cb-9cdf-2246f70b6cc5",
+    "verifyUrl": "https://www.credly.com/badges/34f021b6-0ff4-43cb-9cdf-2246f70b6cc5",
+    "image": "https://images.credly.com/size/340x340/images/71c579e0-51fd-4247-b493-d2fa8167157a/image.png",
+    "color": "text-blue-500"
+  },
+  {
+    "id": "CERT-GITHUB-FOUND",
+    "name": "GitHub Foundations",
+    "provider": "GitHub",
+    "status": "ACTIVE",
+    "issued": "2024-05-03",
+    "expires": "2027-05-03",
+    "credentialId": "9c33590a-dfe6-45cb-a3dd-d4ad953ab56b",
+    "verifyUrl": "https://www.credly.com/badges/9c33590a-dfe6-45cb-a3dd-d4ad953ab56b",
+    "image": "https://images.credly.com/size/340x340/images/024d0122-724d-4c5a-bd83-cfe3c4b7a073/image.png",
+    "color": "text-slate-100"
+  },
+  {
+    "id": "CERT-AZURE-ADMIN",
+    "name": "Microsoft Certified: Azure Administrator Associate",
+    "provider": "Microsoft",
+    "status": "EXPIRED",
+    "issued": "2022-09-26",
+    "expires": "2023-09-26",
+    "credentialId": "e6b52acb-d557-45d5-8450-855c211ed8af",
+    "verifyUrl": "https://www.credly.com/badges/e6b52acb-d557-45d5-8450-855c211ed8af",
+    "image": "https://images.credly.com/size/340x340/images/336eebfc-0ac3-4553-9a67-b402f491f185/azure-administrator-associate-600x600.png",
+    "color": "text-blue-600"
+  },
+  {
+    "id": "CERT-AZURE-FUND",
+    "name": "Microsoft Certified: Azure Fundamentals",
+    "provider": "Microsoft",
+    "status": "ACTIVE",
+    "issued": "2022-09-18",
+    "expires": "Lifetime",
+    "credentialId": "2f11c5fd-5af0-41e7-8139-002929077642",
+    "verifyUrl": "https://www.credly.com/badges/2f11c5fd-5af0-41e7-8139-002929077642",
+    "image": "https://images.credly.com/size/340x340/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png",
+    "color": "text-blue-600"
+  },
+  {
+    "id": "CERT-GCP-SRE",
+    "name": "Site Reliability Engineering: Measuring and Managing Reliability",
+    "provider": "Google Cloud",
+    "status": "ACTIVE",
+    "issued": "2024-03-13",
+    "expires": "Lifetime",
+    "credentialId": "BGRJXLP9F643",
+    "verifyUrl": "https://coursera.org/verify/BGRJXLP9F643",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg",
+    "color": "text-blue-500"
+  }
+]
