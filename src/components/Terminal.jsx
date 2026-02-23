@@ -1,12 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { Terminal as XTerm } from 'xterm';
-import { FitAddon } from '@xterm/addon-fit';
-import { WebLinksAddon } from '@xterm/addon-web-links';
-import 'xterm/css/xterm.css';
+import React, { useEffect, useRef } from "react";
+import xtermPkg from "xterm";
+import { FitAddon } from "@xterm/addon-fit";
+import { WebLinksAddon } from "@xterm/addon-web-links";
+import "xterm/css/xterm.css";
 
-const Terminal = () => {
-  const terminalRef = useRef(null);
-  const xtermRef = useRef(null);
+const { Terminal: XTerm } = xtermPkg;
 
   useEffect(() => {
     if (!terminalRef.current) return;
