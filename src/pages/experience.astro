@@ -1,105 +1,134 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { ExternalLink } from "lucide-react";
 
-const education = [
+const roles = [
   {
-    degree: "Berkeley CTO Program",
-    institution: "UC Berkeley",
-    location: "Berkeley, CA (program)",
-    duration: "2025 – 2026",
-    link: "https://executive.berkeley.edu/",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/UC_Berkeley_logo.svg",
-    coursework: ["CTO / executive-level technical leadership curriculum"],
-    skills: ["Executive strategy", "Technology leadership", "Org design", "Business alignment"],
+    dates: "Feb 2024 – Present",
+    title: "Engineering Manager — SRE / Operations / Cloud Infrastructure",
+    company: "TouchNet (Global Payments)",
+    notes: [
+      "Leading SRE, Operations, and Cloud Infrastructure teams.",
+      "Driving reliability, scalability, and cloud platform maturity.",
+      "Improving incident management practices and operational excellence.",
+      "Enabling engineering teams through automation and infrastructure strategy."
+    ]
   },
   {
-    degree: "Master of Science",
-    institution: "University of Wisconsin–Milwaukee",
-    location: "Milwaukee, WI, USA",
-    duration: "2004 – 2008",
-    link: "http://www.worldcat.org/oclc/288956579",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3f/University_of_Wisconsin%E2%80%93Milwaukee_logo.svg",
-    coursework: ["Master's thesis (WorldCat record)"],
-    skills: ["Systems thinking", "Engineering leadership", "Software engineering"],
+    dates: "2023 – Present",
+    title: "Adjunct Lecturer — Computer Science",
+    company: "Boise State University",
+    notes: [
+      "Teaching Computer Science courses including CS121.",
+      "Mentoring students in software engineering fundamentals and problem solving.",
+      "Bridging academic learning with real-world engineering and SRE practices."
+    ]
   },
   {
-    degree: "Bachelor of Science",
-    institution: "University of Wisconsin–Milwaukee",
-    location: "Milwaukee, WI, USA",
-    duration: "2000 – 2004",
-    link: "http://www.uwm.edu",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3f/University_of_Wisconsin%E2%80%93Milwaukee_logo.svg",
-    coursework: ["Computer Science foundations"],
-    skills: ["Software engineering", "Problem solving"],
+    dates: "Jan 2021 – Jul 2023",
+    title: "Senior Manager, Site Reliability Engineering",
+    company: "Kohl's",
+    notes: [
+      "Led SRE teams focused on reliability, scalability, and incident management.",
+      "Built high-trust engineering teams and improved operational resilience."
+    ]
   },
+  {
+    dates: "Dec 2019 – Jan 2021",
+    title: "Principal Engineer & Team Lead, DevOps Now",
+    company: "IBM (formerly Taos Mountain Inc)",
+    notes: [
+      "Led DevOps and SRE initiatives as a principal engineer and technical leader.",
+      "Guided cloud modernization and infrastructure strategy engagements."
+    ]
+  },
+  {
+    dates: "Feb 2018 – Dec 2019",
+    title: "Cloud Enterprise Architect",
+    company: "Micron",
+    notes: [
+      "Designed and led enterprise cloud architecture initiatives.",
+      "Enabled scalable infrastructure and engineering velocity."
+    ]
+  },
+  {
+    dates: "Nov 2014 – Feb 2018",
+    title: "Lead, Senior Site Reliability Engineer",
+    company: "HP Inc (formerly Hewlett-Packard)",
+    notes: [
+      "Led reliability engineering efforts for production systems.",
+      "Improved operational excellence and incident response maturity."
+    ]
+  },
+  {
+    dates: "Sep 2013 – Nov 2014",
+    title: "Software Development Engineer",
+    company: "Xylem (formerly Sensus)",
+    notes: [
+      "Built and supported production software systems.",
+      "Contributed to engineering delivery and product stability."
+    ]
+  },
+  {
+    dates: "Jan 2012 – Sep 2013",
+    title: "Software Engineer",
+    company: "EdPower (formerly Silverback Learning Solutions)",
+    notes: [
+      "Software engineering and feature delivery in production systems."
+    ]
+  },
+  {
+    dates: "Mar 2010 – Dec 2011",
+    title: "Software Engineer II/III",
+    company: "Adecco (assigned to Hewlett-Packard)",
+    notes: [
+      "Enterprise software engineering in large-scale environments."
+    ]
+  },
+  {
+    dates: "Oct 2008 – Mar 2010",
+    title: "Quality Assurance Engineer",
+    company: "Bodybuilding.com",
+    notes: [
+      "Quality engineering supporting product reliability and release cycles."
+    ]
+  },
+  {
+    dates: "Jun 2007 – Oct 2008",
+    title: "Firmware Design Engineer",
+    company: "Hewlett-Packard",
+    notes: [
+      "Firmware engineering and system-level development."
+    ]
+  },
+  {
+    dates: "Mar 2002 – Jun 2007",
+    title: "Software Test Engineer",
+    company: "Rockwell Automation (formerly Rockwell Software)",
+    notes: [
+      "Early-career software test engineering and system validation."
+    ]
+  }
 ];
 ---
 
-<Layout title="Education — Jane Miceli">
-  <h1 class="text-3xl font-bold">Academic Kernel</h1>
+<Layout title="Experience — Jane Miceli">
+  <h1 class="text-3xl font-bold">Experience</h1>
   <p class="mt-2 text-slate-300">
-    Compiled theoretical foundations powering my practical engineering runtime.
+    A timeline across engineering, architecture, DevOps, SRE, leadership, and education.
   </p>
 
-  <div class="mt-8 space-y-6">
-    {education.map((edu) => (
+  <div class="mt-8 space-y-4">
+    {roles.map((role) => (
       <section class="rounded-2xl border border-white/10 bg-black/20 p-6">
-        <div class="flex items-start gap-4">
+        <div class="text-sm font-mono text-slate-400">{role.dates}</div>
+        <div class="mt-1 text-xl font-semibold">{role.title}</div>
+        <div class="mt-1 text-slate-300">{role.company}</div>
 
-          {/* LOGO — strictly constrained */}
-          <div class="h-16 w-16 shrink-0 rounded-xl border border-white/10 bg-white/5 p-2 flex items-center justify-center">
-            <img
-              src={edu.logo}
-              alt={`${edu.institution} logo`}
-              class="max-h-12 max-w-12 object-contain"
-              loading="lazy"
-              referrerpolicy="no-referrer"
-            />
-          </div>
-
-          <div class="min-w-0">
-            <div class="text-xl font-semibold">{edu.degree}</div>
-            <div class="mt-1 text-slate-300">{edu.institution}</div>
-            <div class="mt-1 text-sm text-slate-400">
-              {edu.location} • {edu.duration}
-            </div>
-
-            <div class="mt-3">
-              <a
-                class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300"
-                href={edu.link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                View reference <ExternalLink size={16} />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Terminal-style block */}
-        <div class="mt-6 rounded-xl border border-white/10 bg-black/30 p-4 font-mono text-sm">
-          <div class="text-slate-400">zsh — {edu.duration}</div>
-
-          <div class="mt-3">➜ ~ ls ./coursework</div>
-          <div class="mt-2 flex flex-wrap gap-2">
-            {edu.coursework.map((c) => (
-              <span class="rounded-lg bg-white/5 px-2 py-1">
-                {c}
-              </span>
-            ))}
-          </div>
-
-          <div class="mt-4 text-slate-400">➜ ~ cat ./skills</div>
-          <div class="mt-2 flex flex-wrap gap-2">
-            {edu.skills.map((s) => (
-              <span class="rounded-lg bg-white/5 px-2 py-1">
-                {s}
-              </span>
-            ))}
-          </div>
-        </div>
+        <ul class="mt-3 list-disc pl-5 text-slate-300 space-y-1">
+          {role.notes.map((note) => (
+            <li>{note}</li>
+          ))}
+        </ul>
       </section>
     ))}
   </div>
