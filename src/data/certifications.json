@@ -8,7 +8,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://www.scrumalliance.org/community/profile/jmiceli",
-    "image": "",
+    "image": "https://www.scrumalliance.org/badges/sa-caf-300.png",
     "color": "text-emerald-400"
   },
   {
@@ -20,7 +20,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "",
-    "image": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/20/Cornell_University_logo.svg",
     "color": "text-slate-200"
   },
   {
@@ -32,7 +32,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://www.scrumalliance.org/community/profile/jmiceli",
-    "image": "",
+    "image": "https://www.scrumalliance.org/badges/sa-cas_l1-300.png",
     "color": "text-emerald-400"
   },
   {
@@ -56,7 +56,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://coursera.org/share/424f6dd1f7881ab1f684f6d7a5707273",
-    "image": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg",
     "color": "text-blue-400"
   },
   {
@@ -68,7 +68,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://www.scrumalliance.org/community/profile/jmiceli",
-    "image": "",
+    "image": "https://www.scrumalliance.org/badges/sa-cas_l1-300.png",
     "color": "text-emerald-400"
   },
   {
@@ -80,7 +80,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://www.scrumalliance.org/community/profile/jmiceli",
-    "image": "",
+    "image": "https://www.scrumalliance.org/badges/sa-cas_l2-300.png",
     "color": "text-emerald-400"
   },
   {
@@ -92,7 +92,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://www.scrumalliance.org/community/profile/jmiceli",
-    "image": "",
+    "image": "https://www.scrumalliance.org/badges/sa-adv_csm-300.png",
     "color": "text-emerald-400"
   },
   {
@@ -104,7 +104,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "",
-    "image": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/57/SAFe_Logo.svg",
     "color": "text-slate-200"
   },
   {
@@ -116,7 +116,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://www.scrumalliance.org/community/profile/jmiceli",
-    "image": "",
+    "image": "https://www.scrumalliance.org/badges/sa-cspo-300.png",
     "color": "text-emerald-400"
   },
   {
@@ -128,7 +128,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://www.scrumalliance.org/community/profile/jmiceli",
-    "image": "",
+    "image": "https://www.scrumalliance.org/badges/sa-csp_sm-300.png",
     "color": "text-emerald-400"
   },
   {
@@ -140,7 +140,7 @@
     "expires": "Lifetime",
     "credentialId": "176683",
     "verifyUrl": "https://www.scrum.org/user/176683",
-    "image": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Scrum.org_logo.svg",
     "color": "text-slate-200"
   },
   {
@@ -152,7 +152,7 @@
     "expires": "Lifetime",
     "credentialId": "",
     "verifyUrl": "https://www.scrumalliance.org/community/profile/jmiceli",
-    "image": "",
+    "image": "https://www.scrumalliance.org/badges/sa-csm-300.png",
     "color": "text-emerald-400"
   },
   {
